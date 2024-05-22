@@ -23,10 +23,18 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getAllProductsFormDB();
+    const { searchTerm } = req.query;
+
+    const result = await ProductServices.getAllProductsFormDB(
+      searchTerm as string | undefined
+    );
     res.status(200).json({
       success: true,
-      message: "Products fetched successfully!",
+      message: `${
+        searchTerm
+          ? `Products matching search term ${searchTerm} fetched succesfully!`
+          : "Products fetched successfully!"
+      }`,
       data: result,
     });
   } catch (error) {
@@ -102,5 +110,5 @@ export const ProductController = {
   getAllProducts,
   getOneProduct,
   updateOneProduct,
-  deleteOneproduct
+  deleteOneproduct,
 };

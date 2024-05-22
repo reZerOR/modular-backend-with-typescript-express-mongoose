@@ -6,7 +6,12 @@ const createProductIntoDB = async (product: TProduct) => {
   return result;
 };
 
-const getAllProductsFormDB = async () => {
+const getAllProductsFormDB = async (searchTerm: string | undefined) => {
+  if (searchTerm) {
+    const regex = new RegExp(searchTerm, "i");
+    const result = await ProductModel.find({ name: regex });
+    return result;
+  }
   const result = await ProductModel.find();
   return result;
 };
@@ -21,15 +26,15 @@ const updateOneProductInDB = async (id: string, productData: TProduct) => {
   return productData;
 };
 
-const deleteOneProductFromDB = async (id: string)=>{
-    const result = await ProductModel.deleteOne({_id: id})
-    return result
-}
+const deleteOneProductFromDB = async (id: string) => {
+  const result = await ProductModel.deleteOne({ _id: id });
+  return result;
+};
 
 export const ProductServices = {
   createProductIntoDB,
   getAllProductsFormDB,
   getOneProductFromDB,
   updateOneProductInDB,
-  deleteOneProductFromDB
+  deleteOneProductFromDB,
 };
