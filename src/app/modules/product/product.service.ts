@@ -11,13 +11,19 @@ const getAllProductsFormDB = async () => {
   return result;
 };
 
-const getOneProductFromDB = async (id: string)=>{
-    const result = await ProductModel.findOne({_id: id})
-    return result
-}
+const getOneProductFromDB = async (id: string) => {
+  const result = await ProductModel.findOne({ _id: id });
+  return result;
+};
+
+const updateOneProductInDB = async (id: string, productData: TProduct) => {
+  await ProductModel.updateOne({ _id: id }, productData);
+  return productData;
+};
 
 export const ProductServices = {
   createProductIntoDB,
   getAllProductsFormDB,
-  getOneProductFromDB
+  getOneProductFromDB,
+  updateOneProductInDB,
 };

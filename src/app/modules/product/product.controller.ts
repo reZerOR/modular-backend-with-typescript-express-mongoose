@@ -56,8 +56,32 @@ const getOneProduct = async (req: Request, res: Response) => {
   }
 };
 
+const updateOneProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const productData = req.body;
+    const zodParsedData = productValidation.parse(productData);
+    const result = await ProductServices.updateOneProductInDB(
+      productId,
+      zodParsedData
+    );
+    res.status(200).json({
+      success: true,
+      message: "Products updated successfully!",
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: "something went wrong while updating data",
+      error: error,
+    });
+  }
+};
+
 export const ProductController = {
   createProduct,
   getAllProducts,
-  getOneProduct
+  getOneProduct,
+  updateOneProduct,
 };
