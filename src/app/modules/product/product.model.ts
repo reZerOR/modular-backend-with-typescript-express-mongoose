@@ -24,4 +24,4 @@ const productSchema = new Schema<TProduct>({
   inventory: { type: productInventorySchema, _id: false },
 });
 
-export const Product = mongoose.model<TProduct>('Product', productSchema);
+export const ProductModel = mongoose.model<TProduct>('Product', productSchema);
