@@ -15,8 +15,7 @@ const createProduct = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "not valid json",
-      error: error,
+      message: (error as any).issues[0].message || "not valid json",
     });
   }
 };
