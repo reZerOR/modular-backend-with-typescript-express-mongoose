@@ -32,3 +32,37 @@ npm run start:dev
 ```bash
 npm run build
 ```
+
+### 6. Linting
+
+To check for linting errors, run:
+
+```bash
+npm run lint
+```
+To fix linting errors, run:
+```bash
+npm run lint:fix
+```
+
+# Project Dependencies
+
+This project has the following dependencies:
+
+## Main Dependencies
+- dotenv: ^16.4.5
+- express: ^4.19.2
+- mongoose: ^8.4.0
+- typescript-eslint: ^7.10.0
+- zod: ^3.23.8
+
+## Dev Dependencies
+- @types/express: ^4.17.21
+- @types/node: ^20.12.12
+- @typescript-eslint/eslint-plugin: ^7.10.0
+- @typescript-eslint/parser: ^7.10.0
+- eslint: ^8.57.0
+- ts-node: ^10.9.2
+- typescript: ^5.4.5
+
+Please ensure these dependencies are properly installed and configured in your development environment to run the project successfully.
