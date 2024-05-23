@@ -30,6 +30,34 @@ const deleteOneProductFromDB = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id });
   return result;
 };
+const decreaseQuantityOfProduct = async (id: string, quantity: number) => {
+  const result = await ProductModel.updateOne(
+    { _id: id },
+    [
+      {
+        $set: {
+          "inventory.quantity": {
+            $subtract: ["$inventory.quantity", quantity],
+          },
+        },
+      },
+      {
+        $set: {
+          "inventory.inStock": {
+            $cond: {
+              if: {
+                $lte: [{ $subtract: ["$inventory.quantity", quantity] }, 0],
+              },
+              then: false,
+              else: true,
+            },
+          },
+        },
+      },
+    ]
+  );
+  return result;
+};
 
 export const ProductServices = {
   createProductIntoDB,
@@ -37,4 +65,5 @@ export const ProductServices = {
   getOneProductFromDB,
   updateOneProductInDB,
   deleteOneProductFromDB,
+  decreaseQuantityOfProduct,
 };
