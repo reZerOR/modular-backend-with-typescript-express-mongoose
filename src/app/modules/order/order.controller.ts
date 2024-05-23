@@ -41,8 +41,7 @@ const createOrder = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "something went wrong",
-      error: error,
+      message: (error as any).issues[0].message || "something went wrong",
     });
   }
 };
@@ -74,5 +73,5 @@ const getAllOrders = async (req: Request, res: Response) => {
 
 export const OrderController = {
   createOrder,
-  getAllOrders
+  getAllOrders,
 };
