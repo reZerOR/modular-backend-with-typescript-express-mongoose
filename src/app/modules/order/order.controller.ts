@@ -19,7 +19,6 @@ const createOrder = async (req: Request, res: Response) => {
         });
       } else {
         const zodParsedData = orderValidation.parse(orderData);
-        console.log(orderData, zodParsedData);
 
         const result = await OrderServices.createOrderIntoDB(zodParsedData);
         await ProductServices.decreaseQuantityOfProduct(

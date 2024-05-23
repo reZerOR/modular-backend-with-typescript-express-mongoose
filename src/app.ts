@@ -3,7 +3,6 @@ import { ProductRoutes } from "./app/modules/product/product.route";
 import { OrderRouters } from "./app/modules/order/order.route";
 
 const app: Application = express();
-const port = 3000;
 
 app.use(express.json());
 
